@@ -85,7 +85,7 @@ This project is a backend system for a personalized onboarding experience for pa
 
 ### Home Feed
 - **Home Feed**: `api/home-feed/`
-- **Detail**: `api/detail/`
+- **Detail**: `api/detail/?vid=1&bid=2`
 
 ## Running Tests
 To run the tests, use the following command:
