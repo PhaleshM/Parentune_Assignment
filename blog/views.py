@@ -9,6 +9,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from datetime import date
+from django.db.models import Q
 
 
 class RegisterView(generics.CreateAPIView):
@@ -139,11 +140,16 @@ class HomeFeedView(APIView):
         
         children = Child.objects.filter(user=user)
 
+        blogs = Blog.objects.none()
+        vlogs = Vlog.objects.none()
+
         if children.exists():
-            age_groups = [self.get_age_group(child) for child in children]
-            print(age_groups)
-            blogs = Blog.objects.filter(age_group__in=age_groups, status=True)
-            vlogs = Vlog.objects.filter(age_group__in=age_groups, status=True)
+            for child in children:
+                age_group = self.get_age_group(child)
+                gender = child.gender
+
+                blogs = blogs | Blog.objects.filter(Q(age_group=age_group) | Q(gender=gender), status=True)
+                vlogs = vlogs | Vlog.objects.filter(Q(age_group=age_group) | Q(gender=gender), status=True)        
         else:
             blogs = Blog.objects.filter(status=True)
             vlogs = Vlog.objects.filter(status=True)

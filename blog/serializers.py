@@ -25,12 +25,12 @@ class ChildSerializer(serializers.ModelSerializer):
 class BlogSerializer(serializers.ModelSerializer):
     class Meta:
         model = Blog
-        fields = ['id', 'title', 'content', 'published_at', 'updated_at', 'status', 'age_group']
+        fields = ['id', 'title', 'content', 'published_at', 'updated_at', 'status', 'age_group','gender']
 
 class VlogSerializer(serializers.ModelSerializer):
     class Meta:
         model = Vlog
-        fields = ['id', 'title', 'video_url', 'published_at', 'updated_at', 'status', 'age_group']
+        fields = ['id', 'title', 'video_url', 'published_at', 'updated_at', 'status', 'age_group','gender']
 
 
 class RegisterSerializer(serializers.ModelSerializer):

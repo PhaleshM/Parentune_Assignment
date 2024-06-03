@@ -17,6 +17,7 @@ class UserProfile(models.Model):
         return self.user.username
 
 # Child model to store information about the children
+
 class Child(models.Model):
     GENDER_CHOICES = [
         ('male', 'Male'),
@@ -39,8 +40,13 @@ AGE_GROUP_CHOICES = [
     ('1-3', '1-3'),
     ('3-7', '3-7'),
     ('7-10', '7-10'),
-]
+    ]
 
+GENDER_CHOICES = [
+    ('male', 'Male'),
+    ('female', 'Female'),
+    ('any', 'Any'),
+    ]
 class Blog(models.Model):
     title = models.CharField(max_length=200)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_posts')
@@ -49,6 +55,7 @@ class Blog(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     status = models.BooleanField(default=False)
     age_group = models.CharField(max_length=5, choices=AGE_GROUP_CHOICES, default='all')
+    gender = models.CharField(max_length=10, choices=GENDER_CHOICES, default='any')
 
     class Meta:
         ordering = ('-published_at',)
@@ -65,7 +72,7 @@ class Vlog(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     status = models.BooleanField(default=False)
     age_group = models.CharField(max_length=5, choices=AGE_GROUP_CHOICES, default='all')
-
+    gender = models.CharField(max_length=10, choices=GENDER_CHOICES,default='any')
     class Meta:
         ordering = ('-published_at',)
 
